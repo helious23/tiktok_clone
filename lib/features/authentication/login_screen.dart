@@ -41,7 +41,7 @@ class LogInScreen extends StatelessWidget {
               Gaps.v40,
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.user),
-                text: "Use phone or email",
+                text: "Use E-mail & password",
                 onTabCallback: () {},
               ),
               Gaps.v16,
