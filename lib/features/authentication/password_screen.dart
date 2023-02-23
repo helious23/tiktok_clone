@@ -158,7 +158,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
               FormButton(
                 onTabCallback: _onSubmit,
                 disabled: !_isPasswordValid(),
-                text: 'Next',
               )
             ],
           ),

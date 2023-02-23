@@ -13,8 +13,15 @@ class LoginFormScreen extends StatefulWidget {
 class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Map<String, String> formData = {};
+
   void _onSubmitTap() {
-    _formKey.currentState?.validate();
+    if (_formKey.currentContext != null) {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        print(formData);
+      }
+    }
   }
 
   @override
@@ -33,20 +40,50 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
             children: [
               Gaps.v28,
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'E-mail',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
                 ),
                 validator: (value) {
-                  return "Not exist";
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['email'] = newValue;
+                  }
                 },
               ),
               Gaps.v16,
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Password',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
                 ),
                 validator: (value) {
-                  return "Wrong Password";
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['password'] = newValue;
+                  }
                 },
               ),
               Gaps.v28,

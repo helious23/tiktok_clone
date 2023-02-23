@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class FormButton extends StatelessWidget {
-  const FormButton({
-    super.key,
-    required this.disabled,
-    required this.text,
-    required this.onTabCallback,
-  });
-
   final bool disabled;
   final String text;
   final GestureTapCallback onTabCallback;
+
+  const FormButton({
+    super.key,
+    required this.disabled,
+    this.text = 'Next',
+    required this.onTabCallback,
+  });
 
   @override
   Widget build(BuildContext context) {

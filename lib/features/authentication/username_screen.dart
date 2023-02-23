@@ -98,7 +98,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
               FormButton(
                 onTabCallback: _onNextTap,
                 disabled: _username.isEmpty,
-                text: 'Next',
               )
             ],
           ),
