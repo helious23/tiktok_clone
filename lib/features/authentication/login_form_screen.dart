@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -12,6 +14,7 @@ class LoginFormScreen extends StatefulWidget {
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
 
   Map<String, String> formData = {};
 
@@ -19,13 +22,20 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentContext != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        print(formData);
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const InterestsScreen(),
+        ));
       }
     }
   }
 
   void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
+  }
+
+  void _toggleObscureText() {
+    _obscureText = !_obscureText;
+    setState(() {});
   }
 
   @override
@@ -60,6 +70,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     ),
                   ),
                   validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return "Please write your E-mail";
+                    }
                     return null;
                   },
                   onSaved: (newValue) {
@@ -71,6 +84,21 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v16,
                 TextFormField(
                   decoration: InputDecoration(
+                    suffix: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: _toggleObscureText,
+                          child: FaIcon(
+                            _obscureText
+                                ? FontAwesomeIcons.eye
+                                : FontAwesomeIcons.eyeSlash,
+                            color: Colors.grey.shade500,
+                            size: Sizes.size20,
+                          ),
+                        )
+                      ],
+                    ),
                     hintText: 'Password',
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -83,6 +111,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                       ),
                     ),
                   ),
+                  obscureText: _obscureText,
                   validator: (value) {
                     return null;
                   },
