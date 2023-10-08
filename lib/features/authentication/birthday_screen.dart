@@ -29,6 +29,12 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     _birthdayController.value = TextEditingValue(text: textDate);
   }
 
+  void _onBoardingTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const InterestsScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,9 +83,12 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
               cursorColor: Theme.of(context).primaryColor,
             ),
             Gaps.v28,
-            const FormButton(
-              disabled: false,
-              targetWidget: InterestsScreen(),
+            GestureDetector(
+              onTap: _onBoardingTap,
+              child: const FormButton(
+                disabled: false,
+                text: 'Next',
+              ),
             )
           ],
         ),

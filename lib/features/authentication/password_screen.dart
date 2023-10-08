@@ -200,9 +200,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 ],
               ),
               Gaps.v28,
-              FormButton(
-                disabled: _password.isEmpty || _isPasswordValid() == false,
-                targetWidget: const BirthdayScreen(),
+              GestureDetector(
+                onTap: _onSubmit,
+                child: FormButton(
+                  disabled: _password.isEmpty || _isPasswordValid() == false,
+                  text: 'Next',
+                ),
               )
             ],
           ),
