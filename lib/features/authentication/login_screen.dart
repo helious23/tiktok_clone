@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  void onSignUpTab(BuildContext context) {
+  void _onSignUpTab(BuildContext context) {
     Navigator.of(context).pop();
   }
 
@@ -42,19 +43,31 @@ class LoginScreen extends StatelessWidget {
               AuthButton(
                 icon: FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password",
+                targetWidget: EmailScreen(),
+              ),
+              Gaps.v16,
+              AuthButton(
+                icon: FaIcon(FontAwesomeIcons.facebook),
+                text: "Continue with Facebook",
+                targetWidget: EmailScreen(),
+              ),
+              Gaps.v16,
+              AuthButton(
+                icon: FaIcon(FontAwesomeIcons.google),
+                text: "Continue with Google",
+                targetWidget: EmailScreen(),
               ),
               Gaps.v16,
               AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
+                targetWidget: EmailScreen(),
               ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        elevation: 2,
-        color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Sizes.size32,
@@ -70,7 +83,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onSignUpTab(context),
+                onTap: () => _onSignUpTab(context),
                 child: Text(
                   'Sign up',
                   style: TextStyle(
