@@ -33,15 +33,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
     super.dispose();
   }
 
-  void _onNextTap() {
-    if (_username.isEmpty) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,9 +81,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
               cursorColor: Theme.of(context).primaryColor,
             ),
             Gaps.v28,
-            GestureDetector(
-              onTap: _onNextTap,
-              child: FormButton(disabled: _username.isEmpty),
+            FormButton(
+              disabled: _username.isEmpty,
+              targetWidget: const EmailScreen(),
             )
           ],
         ),
