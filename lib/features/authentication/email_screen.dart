@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/password_screen.dart';
@@ -83,6 +84,9 @@ class _EmailScreenState extends State<EmailScreen> {
               Gaps.v16,
               TextField(
                 controller: _emailController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                 keyboardType: TextInputType.emailAddress,
                 onEditingComplete: () => _onSubmit(),
                 autocorrect: false,

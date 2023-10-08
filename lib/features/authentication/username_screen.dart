@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
@@ -65,6 +66,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
             Gaps.v16,
             TextField(
               controller: _usernameController,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
               decoration: InputDecoration(
                 hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
