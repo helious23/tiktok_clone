@@ -151,7 +151,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                         GestureDetector(
                           onTap: _toggleObscureText,
                           child: FaIcon(
-                            FontAwesomeIcons.eye,
+                            _obscureText
+                                ? FontAwesomeIcons.eye
+                                : FontAwesomeIcons.eyeSlash,
                             color: Colors.grey.shade500,
                             size: Sizes.size20,
                           ),
