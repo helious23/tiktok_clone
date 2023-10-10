@@ -53,7 +53,14 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        print(formData);
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InterestsScreen(),
+          ),
+          (route) => false,
+        );
       }
     }
   }
@@ -65,15 +72,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   void _toggleObscureText() {
     _obscureText = !_obscureText;
     setState(() {});
-  }
-
-  void _onSubmit() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const InterestsScreen(),
-      ),
-    );
   }
 
   @override
@@ -134,7 +132,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   ],
                   obscureText: _obscureText,
                   controller: _passwordController,
-                  onEditingComplete: () => _onSubmit(),
+                  onEditingComplete: () => _onSubmitTap(),
                   decoration: InputDecoration(
                     suffix: Row(
                       mainAxisSize: MainAxisSize.min,
