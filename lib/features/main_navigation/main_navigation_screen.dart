@@ -12,9 +12,11 @@ class MainNavigationScreen extends StatefulWidget {
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
+class _MainNavigationScreenState extends State<MainNavigationScreen>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   bool _buttonTap = false;
+  late AnimationController _controller;
 
   void _onTap(int index) {
     setState(() {
@@ -23,6 +25,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onPostVideoButtonTapDown(TapDownDetails onTapDown) {
+    _controller.reset();
+    _controller.forward();
     setState(() {
       _buttonTap = true;
     });
@@ -46,6 +50,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         fullscreenDialog: true,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -97,8 +116,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 onTapDown: (details) => _onPostVideoButtonTapDown(details),
                 onTapUp: (details) => _onPostVideoButtonTapUp(details),
                 onTap: _onPostVideoButtonTap,
-                child: PostVideoButton(
-                  buttonTap: _buttonTap,
+                child: RotationTransition(
+                  turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                  child: PostVideoButton(
+                    buttonTap: _buttonTap,
+                  ),
                 ),
               ),
               Gaps.h24,

@@ -14,7 +14,30 @@ class PostVideoButton extends StatefulWidget {
   State<PostVideoButton> createState() => _PostVideoButtonState();
 }
 
-class _PostVideoButtonState extends State<PostVideoButton> {
+class _PostVideoButtonState extends State<PostVideoButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void shake() {
+    _controller.reset();
+    _controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
