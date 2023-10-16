@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_bgm.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_tag.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -26,6 +30,13 @@ class _VideoPostState extends State<VideoPost>
   bool _isPaused = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
+  final List<String> tags = [
+    "가야랜드🎢",
+    "Super Viking",
+    "Camp site",
+    "With Soyeul💖",
+  ];
+
   late final AnimationController _animationController;
 
   void _onVideoChanged() {
@@ -39,9 +50,9 @@ class _VideoPostState extends State<VideoPost>
 
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
-
-    setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChanged);
+    setState(() {});
   }
 
   @override
@@ -125,6 +136,76 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
+          Positioned(
+            bottom: 20,
+            left: 10,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "@Max",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizes.size20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Gaps.v10,
+                  const Text(
+                    "Super Viking with Soyeul 💖 ",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizes.size18,
+                    ),
+                  ),
+                  Gaps.v10,
+                  VideoTag(
+                    tag: tags.map((tag) => '#$tag').join(', '),
+                  ),
+                  Gaps.v10,
+                  SizedBox(
+                    height: 30,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: const VideoBgmInfo(bgmInfo: "10cm - 봄이 좋냐?"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      'https://avatars.githubusercontent.com/u/78624290?v=4'),
+                  child: Text("Max"),
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: "2.9M",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: "33.0K",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: "Share",
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
