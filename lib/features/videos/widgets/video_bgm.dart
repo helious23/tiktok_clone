@@ -26,6 +26,7 @@ class VideoBgmInfo extends StatelessWidget {
         Expanded(
           child: Marquee(
             text: bgmInfo,
+            pauseAfterRound: const Duration(milliseconds: 500),
             style: const TextStyle(
               color: Colors.white,
               fontSize: Sizes.size16,
