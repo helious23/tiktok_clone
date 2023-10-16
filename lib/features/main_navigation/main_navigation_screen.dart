@@ -26,14 +26,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
   }
 
   void _onPostVideoButtonTapDown(TapDownDetails onTapDown) {
-    _controller.reset();
-    _controller.forward();
+    _controller.repeat();
     setState(() {
       _buttonTap = true;
     });
   }
 
   void _onPostVideoButtonTapUp(TapUpDetails onTapUp) {
+    _controller.reset();
     setState(() {
       _buttonTap = false;
     });
