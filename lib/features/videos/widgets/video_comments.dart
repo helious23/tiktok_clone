@@ -33,6 +33,8 @@ class _VideoCommentsState extends State<VideoComments> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final ScrollController scrollController = ScrollController();
+
     return Container(
       height: size.height * 0.75,
       decoration: BoxDecoration(
@@ -60,57 +62,63 @@ class _VideoCommentsState extends State<VideoComments> {
           onTap: _stopWriting,
           child: Stack(
             children: [
-              ListView.separated(
-                separatorBuilder: (context, index) => Gaps.v20,
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size10,
-                  horizontal: Sizes.size16,
-                ),
-                itemCount: 10,
-                itemBuilder: (context, index) => Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CircleAvatar(
-                      radius: 18,
-                      child: Text("Max"),
-                    ),
-                    Gaps.h10,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              Scrollbar(
+                controller: scrollController,
+                child: ListView.separated(
+                  controller: scrollController,
+                  separatorBuilder: (context, index) => Gaps.v20,
+                  padding: const EdgeInsets.only(
+                    top: Sizes.size10,
+                    left: Sizes.size16,
+                    right: Sizes.size16,
+                    bottom: Sizes.size96 + Sizes.size20,
+                  ),
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CircleAvatar(
+                        radius: 18,
+                        child: Text("Max"),
+                      ),
+                      Gaps.h10,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Max",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: Sizes.size14,
+                                color: Colors.grey.shade500,
+                              ),
+                            ),
+                            Gaps.v3,
+                            const Text(
+                                "소율이와 함께 슈퍼바이킹🎢 보기만 해도 무섭고 어지러워 😵‍💫 어떻게 웃으면서 타는 거지?? 🧐")
+                          ],
+                        ),
+                      ),
+                      Gaps.h10,
+                      Column(
                         children: [
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            color: Colors.grey.shade500,
+                            size: Sizes.size20,
+                          ),
+                          Gaps.v2,
                           Text(
-                            "Max",
+                            '52.2K',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: Sizes.size14,
                               color: Colors.grey.shade500,
                             ),
                           ),
-                          Gaps.v3,
-                          const Text(
-                              "소율이와 함께 슈퍼바이킹🎢 보기만 해도 무섭고 어지러워 😵‍💫 어떻게 웃으면서 타는 거지?? 🧐")
                         ],
                       ),
-                    ),
-                    Gaps.h10,
-                    Column(
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.heart,
-                          color: Colors.grey.shade500,
-                          size: Sizes.size20,
-                        ),
-                        Gaps.v2,
-                        Text(
-                          '52.2K',
-                          style: TextStyle(
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Positioned(
