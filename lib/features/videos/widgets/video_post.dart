@@ -27,8 +27,10 @@ class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/video.MOV");
+  late final AnimationController _animationController;
 
   bool _isPaused = false;
+
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
   final List<String> tags = [
@@ -37,8 +39,6 @@ class _VideoPostState extends State<VideoPost>
     "Camp site",
     "With Soyeul💖",
   ];
-
-  late final AnimationController _animationController;
 
   void _onVideoChanged() {
     if (_videoPlayerController.value.isInitialized) {
@@ -72,6 +72,7 @@ class _VideoPostState extends State<VideoPost>
   @override
   void dispose() {
     _videoPlayerController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -157,7 +158,6 @@ class _VideoPostState extends State<VideoPost>
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
