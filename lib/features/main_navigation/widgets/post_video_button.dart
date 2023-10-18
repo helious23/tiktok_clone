@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-class PostVideoButton extends StatefulWidget {
+class PostVideoButton extends StatelessWidget {
   final bool buttonTap;
+  final bool inverted;
 
   const PostVideoButton({
     super.key,
     required this.buttonTap,
+    required this.inverted,
   });
 
-  @override
-  State<PostVideoButton> createState() => _PostVideoButtonState();
-}
-
-class _PostVideoButtonState extends State<PostVideoButton> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,7 +27,7 @@ class _PostVideoButtonState extends State<PostVideoButton> {
               horizontal: Sizes.size8,
             ),
             decoration: BoxDecoration(
-              color: widget.buttonTap
+              color: buttonTap
                   ? Theme.of(context).primaryColor
                   : const Color(0xff61D4F0),
               borderRadius: BorderRadius.circular(
@@ -49,7 +46,7 @@ class _PostVideoButtonState extends State<PostVideoButton> {
               horizontal: Sizes.size8,
             ),
             decoration: BoxDecoration(
-              color: widget.buttonTap
+              color: buttonTap
                   ? const Color(0xff61D4F0)
                   : Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(
@@ -63,15 +60,16 @@ class _PostVideoButtonState extends State<PostVideoButton> {
             horizontal: Sizes.size12,
           ),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(
-                Sizes.size6,
-              )),
+            color: inverted ? Colors.black : Colors.white,
+            borderRadius: BorderRadius.circular(
+              Sizes.size6,
+            ),
+          ),
           height: 32,
-          child: const Center(
+          child: Center(
             child: FaIcon(
               FontAwesomeIcons.plus,
-              color: Colors.black,
+              color: inverted ? Colors.white : Colors.black,
               size: 18,
             ),
           ),
