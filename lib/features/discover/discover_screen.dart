@@ -224,7 +224,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 ),
               ),
             ),
-            for (var tab in tabs.skip(1))
+            const Center(
+              child: Text("Users"),
+            ),
+            for (var tab in tabs.skip(2))
               Center(
                 child: Text(
                   tab,
