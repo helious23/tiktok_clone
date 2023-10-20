@@ -19,7 +19,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 3;
   bool _buttonTap = false;
-  late AnimationController _controller;
+
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
 
   void _onTap(int index) {
     setState(() {
@@ -27,15 +31,18 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
     });
   }
 
+  late final Animation<double> _animation =
+      Tween(begin: 0.0, end: 1.0).animate(_animationController);
+
   void _onPostVideoButtonTapDown(TapDownDetails onTapDown) {
-    _controller.repeat();
+    _animationController.repeat();
     setState(() {
       _buttonTap = true;
     });
   }
 
   void _onPostVideoButtonTapUp(TapUpDetails onTapUp) {
-    _controller.reset();
+    _animationController.reset();
     setState(() {
       _buttonTap = false;
     });
@@ -56,17 +63,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
   }
 
   @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-  }
-
-  @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -124,7 +122,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
                 onTapUp: (details) => _onPostVideoButtonTapUp(details),
                 onTap: _onPostVideoButtonTap,
                 child: RotationTransition(
-                  turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                  turns: _animation,
                   child: PostVideoButton(
                     inverted: _selectedIndex != 0,
                     buttonTap: _buttonTap,
