@@ -96,6 +96,7 @@ class _ActivityScreenState extends State<ActivityScreen>
         title: GestureDetector(
           onTap: _toggleAnimation,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("All Activity"),
@@ -229,10 +230,10 @@ class _ActivityScreenState extends State<ActivityScreen>
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(
-                    Sizes.size5,
+                    Sizes.size12,
                   ),
                   bottomRight: Radius.circular(
-                    Sizes.size5,
+                    Sizes.size12,
                   ),
                 ),
               ),
