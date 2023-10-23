@@ -11,6 +11,14 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+  final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
+
+  void _addItem() {
+    if (_key.currentContext != null) {
+      _key.currentState!.insertItem(0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,17 +27,19 @@ class _ChatsScreenState extends State<ChatsScreen> {
         elevation: 1,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _addItem,
             icon: const FaIcon(FontAwesomeIcons.plus),
           ),
         ],
       ),
-      body: ListView(
+      body: AnimatedList(
+        key: _key,
         padding: const EdgeInsets.symmetric(
           vertical: Sizes.size10,
         ),
-        children: [
-          ListTile(
+        itemBuilder: (context, index, animation) {
+          return ListTile(
+            key: UniqueKey(),
             leading: const CircleAvatar(
               radius: 30,
               foregroundImage: NetworkImage(GITHUB_AVATAR),
@@ -39,9 +49,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
-                  "Jessie",
-                  style: TextStyle(
+                Text(
+                  "Jessie ($index)",
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -58,8 +68,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
               "Did you finish your homework?? 😡",
               style: TextStyle(),
             ),
-          )
-        ],
+          );
+        },
       ),
     );
   }
