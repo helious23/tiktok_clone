@@ -29,6 +29,9 @@ class InboxScreen extends StatelessWidget {
         title: const Text('Inbox'),
         actions: [
           IconButton(
+            padding: const EdgeInsets.only(
+              right: Sizes.size12,
+            ),
             onPressed: () => _onDmPressed(context),
             icon: const FaIcon(
               FontAwesomeIcons.paperPlane,
