@@ -27,8 +27,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     );
   }
 
+// ignore: unused_field
   String _keyword = '';
 
+// ignore: unused_field
   bool _isWriting = false;
 
   final TextEditingController _textEditingController = TextEditingController();

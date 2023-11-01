@@ -15,7 +15,20 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
+  // ignore: unused_field
   bool _isWriting = false;
+
+  String _message = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.addListener(() {
+      setState(() {
+        _message = _textEditingController.text;
+      });
+    });
+  }
 
   void _onStartWriting() {
     setState(() {
@@ -177,40 +190,43 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           controller: _textEditingController,
                           onTap: _onStartWriting,
                           decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: Sizes.size10,
-                              ),
-                              hintText: "Send a message...",
-                              hintStyle: const TextStyle(
-                                fontWeight: FontWeight.w300,
-                              ),
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(
-                                    Sizes.size20,
-                                  ),
-                                  topRight: Radius.circular(
-                                    Sizes.size20,
-                                  ),
-                                  bottomLeft: Radius.circular(
-                                    Sizes.size20,
-                                  ),
-                                  bottomRight: Radius.circular(
-                                    Sizes.size5,
-                                  ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: Sizes.size10,
+                            ),
+                            hintText: "Send a message...",
+                            hintStyle: const TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(
+                                  Sizes.size20,
                                 ),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              suffix: GestureDetector(
-                                onTap: _onClearTap,
-                                child: FaIcon(
-                                  FontAwesomeIcons.solidCircleXmark,
-                                  color: Colors.grey.shade500,
-                                  size: Sizes.size20,
+                                topRight: Radius.circular(
+                                  Sizes.size20,
                                 ),
-                              )),
+                                bottomLeft: Radius.circular(
+                                  Sizes.size20,
+                                ),
+                                bottomRight: Radius.circular(
+                                  Sizes.size5,
+                                ),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            suffix: _message.isEmpty
+                                ? const SizedBox()
+                                : GestureDetector(
+                                    onTap: _onClearTap,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.solidCircleXmark,
+                                      color: Colors.grey.shade500,
+                                      size: Sizes.size20,
+                                    ),
+                                  ),
+                          ),
                         ),
                       ),
                       Gaps.h20,
@@ -220,7 +236,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           width: Sizes.size40,
                           height: Sizes.size40,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: _message.isEmpty
+                                ? Colors.grey.shade300
+                                : Colors.blue,
                             borderRadius: BorderRadius.circular(
                               Sizes.size56,
                             ),
