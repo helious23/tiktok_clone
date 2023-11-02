@@ -10,24 +10,23 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: ListWheelScrollView(
-        itemExtent: 200,
+      body: ListView(
         children: [
-          for (var x in [1, 2, 3, 4, 5, 6, 7, 87, 9])
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Container(
-                color: Colors.teal,
-                alignment: Alignment.center,
-                child: const Text(
-                  'Pick me',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Sizes.size48,
-                  ),
-                ),
+          ListTile(
+            onTap: () => showAboutDialog(
+              context: context,
+              applicationVersion: "1.0",
+              applicationLegalese: "All right reserved.",
+            ),
+            title: const Text(
+              'About',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
               ),
-            )
+            ),
+            subtitle: const Text('About this app...'),
+          ),
+          const AboutListTile()
         ],
       ),
     );
