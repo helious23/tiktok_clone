@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/url.dart';
+import 'package:tiktok_clone/features/settings/settings_screen.dart';
 import 'package:tiktok_clone/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_clone/features/users/widgets/user_count.dart';
 
@@ -14,6 +15,14 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  void _onGearPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +35,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 title: const Text('Max16'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _onGearPressed,
                     icon: const FaIcon(
                       FontAwesomeIcons.gear,
                       size: Sizes.size20,
