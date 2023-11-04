@@ -1,8 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notification = false;
+
+  void _onNotificationChanged(bool? newValue) {
+    if (newValue == null) return;
+    setState(() {
+      _notification = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,38 +27,18 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ListTile(
-            onTap: () async {
-              final date = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1980),
-                lastDate: DateTime(2030),
-              );
-              print(date);
-
-              final time = await showTimePicker(
-                  context: context, initialTime: TimeOfDay.now());
-              print(time);
-              final booking = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(1980),
-                lastDate: DateTime(2030),
-                builder: (context, child) {
-                  return Theme(
-                    data: ThemeData(
-                        appBarTheme: const AppBarTheme(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.black,
-                    )),
-                    child: child!,
-                  );
-                },
-              );
-
-              print(booking);
-            },
-            title: const Text("What is your birthday?"),
+          SwitchListTile.adaptive(
+            value: _notification,
+            onChanged: _onNotificationChanged,
+            title: const Text('Enable Notifications'),
+            activeColor: Theme.of(context).primaryColor,
+          ),
+          CheckboxListTile(
+            value: _notification,
+            onChanged: _onNotificationChanged,
+            title: const Text('Enable notifications'),
+            subtitle: const Text('Enable notifications'),
+            activeColor: Colors.black,
           ),
           const AboutListTile(),
         ],
