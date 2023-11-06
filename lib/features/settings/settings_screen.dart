@@ -89,7 +89,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               );
             },
-          )
+          ),
+          ListTile(
+            title: const Text('Log out (iOS / Bottom)'),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (context) => CupertinoAlertDialog(
+                  title: const Text('Are you sure?'),
+                  content: const Text('Plx dont go'),
+                  actions: [
+                    CupertinoDialogAction(
+                      child: const Text('No'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    CupertinoDialogAction(
+                      isDestructiveAction: true,
+                      child: const Text('Yes'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Log out (iOS / ActionSHeet)'),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoDialog(
+                context: context,
+                builder: (context) => CupertinoActionSheet(
+                  title: const Text('Are you sure?'),
+                  message: const Text('Please dont gooooooo'),
+                  actions: [
+                    CupertinoActionSheetAction(
+                      isDefaultAction: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Not log out'),
+                    ),
+                    CupertinoActionSheetAction(
+                      isDestructiveAction: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Yes, Plz'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
