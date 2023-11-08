@@ -161,70 +161,74 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     mainAxisSpacing: Sizes.size10,
                     childAspectRatio: 9 / 20,
                   ),
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Sizes.size4),
-                        ),
-                        child: AspectRatio(
-                          aspectRatio: 9 / 16,
-                          child: FadeInImage.assetNetwork(
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/placeholder.jpg",
-                            image:
-                                "https://images.unsplash.com/photo-1531804159968-24716780d214?auto=format&fit=crop&q=80&w=1288&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  itemBuilder: (context, index) => LayoutBuilder(
+                    builder: (context, constraints) => Column(
+                      children: [
+                        Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Sizes.size4),
+                          ),
+                          child: AspectRatio(
+                            aspectRatio: 9 / 16,
+                            child: FadeInImage.assetNetwork(
+                              fit: BoxFit.cover,
+                              placeholder: "assets/images/placeholder.jpg",
+                              image:
+                                  "https://images.unsplash.com/photo-1531804159968-24716780d214?auto=format&fit=crop&q=80&w=1288&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ),
                           ),
                         ),
-                      ),
-                      Gaps.v10,
-                      const Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vel urna nec varius.",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontSize: Sizes.size18,
-                          fontWeight: FontWeight.bold,
+                        Gaps.v10,
+                        Text(
+                          "${constraints.maxWidth} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vel urna nec varius.",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            fontSize: Sizes.size18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Gaps.v8,
-                      DefaultTextStyle(
-                        style: TextStyle(
-                          fontSize: Sizes.size14,
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        child: Row(
-                          children: [
-                            const CircleAvatar(
-                              radius: 12,
-                              backgroundImage: NetworkImage(
-                                'https://avatars.githubusercontent.com/u/78624290?v=4',
-                              ),
-                            ),
-                            Gaps.h4,
-                            const Expanded(
-                              child: Text(
-                                " Donec tortor est, tempus vitae tempus non, mollis eget turpis.",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-                            Gaps.h4,
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                              size: Sizes.size16,
+                        Gaps.v8,
+                        if (constraints.maxWidth < 200 ||
+                            constraints.maxWidth > 250)
+                          DefaultTextStyle(
+                            style: TextStyle(
+                              fontSize: Sizes.size14,
                               color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w600,
                             ),
-                            Gaps.h2,
-                            const Text(
-                              "2.5M",
+                            child: Row(
+                              children: [
+                                const CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage: NetworkImage(
+                                    'https://avatars.githubusercontent.com/u/78624290?v=4',
+                                  ),
+                                ),
+                                Gaps.h4,
+                                const Expanded(
+                                  child: Text(
+                                    " Donec tortor est, tempus vitae tempus non, mollis eget turpis.",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                Gaps.h4,
+                                FaIcon(
+                                  FontAwesomeIcons.heart,
+                                  size: Sizes.size16,
+                                  color: Colors.grey.shade600,
+                                ),
+                                Gaps.h2,
+                                const Text(
+                                  "2.5M",
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )
-                    ],
+                          )
+                      ],
+                    ),
                   ),
                 ),
               ),
