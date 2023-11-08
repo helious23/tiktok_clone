@@ -57,7 +57,6 @@ class _VideoPostState extends State<VideoPost>
     await _videoPlayerController.setLooping(true);
     if (kIsWeb) {
       await _videoPlayerController.setVolume(0);
-      _isMuted = true;
     }
     _videoPlayerController.addListener(_onVideoChanged);
     setState(() {});
