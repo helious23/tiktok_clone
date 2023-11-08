@@ -81,9 +81,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0.5,
-          title: SizedBox(
+          title: Container(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
             height: Sizes.size40,
-            width: MediaQuery.of(context).size.width * 0.9,
             child: TextField(
               onTap: _onStartWriting,
               controller: _textEditingController,
