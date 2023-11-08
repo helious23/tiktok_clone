@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -27,9 +28,11 @@ class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/video.MOV");
+
   late final AnimationController _animationController;
 
   bool _isPaused = false;
+  bool _isMuted = true;
 
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
@@ -52,6 +55,10 @@ class _VideoPostState extends State<VideoPost>
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      _isMuted = true;
+    }
     _videoPlayerController.addListener(_onVideoChanged);
     setState(() {});
   }
@@ -115,6 +122,13 @@ class _VideoPostState extends State<VideoPost>
     _onTogglePause();
   }
 
+  void _onToggleVolume() {
+    _videoPlayerController.setVolume(_isMuted ? 100 : 0);
+    setState(() {
+      _isMuted = !_isMuted;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
@@ -153,6 +167,30 @@ class _VideoPostState extends State<VideoPost>
                       color: Colors.white,
                       size: Sizes.size56,
                     ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 20,
+            top: 20,
+            child: GestureDetector(
+              onTap: _onToggleVolume,
+              child: Container(
+                height: Sizes.size32,
+                width: Sizes.size32,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade700.withOpacity(0.5),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: FaIcon(
+                    _isMuted
+                        ? FontAwesomeIcons.volumeXmark
+                        : FontAwesomeIcons.volumeHigh,
+                    color: Colors.white,
+                    size: Sizes.size12,
                   ),
                 ),
               ),
