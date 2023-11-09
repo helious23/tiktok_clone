@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/url.dart';
@@ -115,148 +116,157 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       ),
       body: GestureDetector(
         onTap: _stopWriting,
-        child: Stack(
-          children: [
-            Scrollbar(
-              controller: _scrollController,
-              child: ListView.separated(
-                controller: _scrollController,
-                padding: const EdgeInsets.only(
-                  top: Sizes.size20,
-                  left: Sizes.size16,
-                  right: Sizes.size16,
-                  bottom: Sizes.size96,
-                ),
-                itemBuilder: (context, index) {
-                  final isMine = index % 2 == 0;
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: isMine
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(
-                          Sizes.size14,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isMine
-                              ? Colors.blue
-                              : Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(
-                              Sizes.size20,
-                            ),
-                            topRight: const Radius.circular(
-                              Sizes.size20,
-                            ),
-                            bottomLeft: Radius.circular(
-                              isMine ? Sizes.size20 : Sizes.size5,
-                            ),
-                            bottomRight: Radius.circular(
-                              !isMine ? Sizes.size20 : Sizes.size5,
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          'This is message!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Sizes.size16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) => Gaps.v10,
-                itemCount: 10,
-              ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
             ),
-            Positioned(
-              bottom: 0,
-              width: MediaQuery.of(context).size.width,
-              child: BottomAppBar(
-                color: Colors.grey.shade100,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.size10,
-                    vertical: Sizes.size10,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _textEditingController,
-                          onTap: _onStartWriting,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: Sizes.size10,
-                            ),
-                            hintText: "Send a message...",
-                            hintStyle: const TextStyle(
-                              fontWeight: FontWeight.w300,
-                            ),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                  Sizes.size20,
-                                ),
-                                topRight: Radius.circular(
-                                  Sizes.size20,
-                                ),
-                                bottomLeft: Radius.circular(
-                                  Sizes.size20,
-                                ),
-                                bottomRight: Radius.circular(
-                                  Sizes.size5,
+            child: LayoutBuilder(
+              builder: (context, constraints) => Stack(
+                children: [
+                  Scrollbar(
+                    controller: _scrollController,
+                    child: ListView.separated(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.only(
+                        top: Sizes.size20,
+                        left: Sizes.size16,
+                        right: Sizes.size16,
+                        bottom: Sizes.size96,
+                      ),
+                      itemBuilder: (context, index) {
+                        final isMine = index % 2 == 0;
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: isMine
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(
+                                Sizes.size14,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isMine
+                                    ? Colors.blue
+                                    : Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: const Radius.circular(
+                                    Sizes.size20,
+                                  ),
+                                  topRight: const Radius.circular(
+                                    Sizes.size20,
+                                  ),
+                                  bottomLeft: Radius.circular(
+                                    isMine ? Sizes.size20 : Sizes.size5,
+                                  ),
+                                  bottomRight: Radius.circular(
+                                    !isMine ? Sizes.size20 : Sizes.size5,
+                                  ),
                                 ),
                               ),
-                              borderSide: BorderSide.none,
+                              child: const Text(
+                                'This is message!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Sizes.size16,
+                                ),
+                              ),
                             ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            suffix: _message.isEmpty
-                                ? const SizedBox()
-                                : GestureDetector(
-                                    onTap: _onClearTap,
-                                    child: FaIcon(
-                                      FontAwesomeIcons.solidCircleXmark,
-                                      color: Colors.grey.shade500,
-                                      size: Sizes.size20,
-                                    ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) => Gaps.v10,
+                      itemCount: 10,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    width: constraints.maxWidth,
+                    child: BottomAppBar(
+                      color: Colors.grey.shade100,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Sizes.size10,
+                          vertical: Sizes.size10,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _textEditingController,
+                                onTap: _onStartWriting,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: Sizes.size10,
                                   ),
-                          ),
+                                  hintText: "Send a message...",
+                                  hintStyle: const TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                  border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(
+                                        Sizes.size20,
+                                      ),
+                                      topRight: Radius.circular(
+                                        Sizes.size20,
+                                      ),
+                                      bottomLeft: Radius.circular(
+                                        Sizes.size20,
+                                      ),
+                                      bottomRight: Radius.circular(
+                                        Sizes.size5,
+                                      ),
+                                    ),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  suffix: _message.isEmpty
+                                      ? const SizedBox()
+                                      : GestureDetector(
+                                          onTap: _onClearTap,
+                                          child: FaIcon(
+                                            FontAwesomeIcons.solidCircleXmark,
+                                            color: Colors.grey.shade500,
+                                            size: Sizes.size20,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                            Gaps.h20,
+                            GestureDetector(
+                              onTap: _onClearTap,
+                              child: Container(
+                                width: Sizes.size40,
+                                height: Sizes.size40,
+                                decoration: BoxDecoration(
+                                  color: _message.isEmpty
+                                      ? Colors.grey.shade300
+                                      : Colors.blue,
+                                  borderRadius: BorderRadius.circular(
+                                    Sizes.size56,
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.paperPlane,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Gaps.h20,
-                      GestureDetector(
-                        onTap: _onClearTap,
-                        child: Container(
-                          width: Sizes.size40,
-                          height: Sizes.size40,
-                          decoration: BoxDecoration(
-                            color: _message.isEmpty
-                                ? Colors.grey.shade300
-                                : Colors.blue,
-                            borderRadius: BorderRadius.circular(
-                              Sizes.size56,
-                            ),
-                          ),
-                          child: const Center(
-                            child: FaIcon(
-                              FontAwesomeIcons.paperPlane,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
