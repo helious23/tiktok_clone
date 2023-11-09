@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/url.dart';
@@ -221,65 +222,73 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ];
           },
-          body: TabBarView(
-            children: [
-              GestureDetector(
-                child: GridView.builder(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: EdgeInsets.zero,
-                  itemCount: 21,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: Sizes.size2,
-                    mainAxisSpacing: Sizes.size2,
-                    childAspectRatio: 9 / 14,
-                  ),
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      Stack(
+          body: Center(
+            child: Container(
+              constraints: const BoxConstraints(
+                maxWidth: Breakpoints.sm,
+              ),
+              child: TabBarView(
+                children: [
+                  GestureDetector(
+                    child: GridView.builder(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      padding: EdgeInsets.zero,
+                      itemCount: 21,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: Sizes.size2,
+                        mainAxisSpacing: Sizes.size2,
+                        childAspectRatio: 9 / 14,
+                      ),
+                      itemBuilder: (context, index) => Column(
                         children: [
-                          AspectRatio(
-                            aspectRatio: 9 / 14,
-                            child: FadeInImage.assetNetwork(
-                              fit: BoxFit.cover,
-                              placeholder: "assets/images/placeholder.jpg",
-                              image:
-                                  "https://images.unsplash.com/photo-1531804159968-24716780d214?auto=format&fit=crop&q=80&w=1288&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ),
+                          Stack(
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 9 / 14,
+                                child: FadeInImage.assetNetwork(
+                                  fit: BoxFit.cover,
+                                  placeholder: "assets/images/placeholder.jpg",
+                                  image:
+                                      "https://images.unsplash.com/photo-1531804159968-24716780d214?auto=format&fit=crop&q=80&w=1288&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                ),
+                              ),
+                              const Positioned(
+                                bottom: Sizes.size4,
+                                left: 8,
+                                child: Row(
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.play,
+                                      color: Colors.white,
+                                      size: Sizes.size12,
+                                    ),
+                                    Gaps.h8,
+                                    Text(
+                                      '4.1M',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: Sizes.size18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                          const Positioned(
-                            bottom: Sizes.size4,
-                            left: 8,
-                            child: Row(
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.play,
-                                  color: Colors.white,
-                                  size: Sizes.size12,
-                                ),
-                                Gaps.h8,
-                                Text(
-                                  '4.1M',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: Sizes.size18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  const Center(
+                    child: Text('Page 2'),
+                  ),
+                ],
               ),
-              const Center(
-                child: Text('Page 2'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
