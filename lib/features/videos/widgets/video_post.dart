@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_bgm.dart';
@@ -32,7 +33,7 @@ class _VideoPostState extends State<VideoPost>
   late final AnimationController _animationController;
 
   bool _isPaused = false;
-  bool _isMuted = true;
+  bool _isMuted = false;
 
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
@@ -53,11 +54,12 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _initVideoPlayer() async {
-    await _videoPlayerController.initialize();
-    await _videoPlayerController.setLooping(true);
     if (kIsWeb) {
       await _videoPlayerController.setVolume(0);
+      _isMuted = true;
     }
+    await _videoPlayerController.initialize();
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChanged);
     setState(() {});
   }
@@ -115,6 +117,9 @@ class _VideoPostState extends State<VideoPost>
     await showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
+      constraints: const BoxConstraints(
+        maxWidth: Breakpoints.sm,
+      ),
       builder: (context) => const VideoComments(),
       isScrollControlled: true,
     );
@@ -133,141 +138,148 @@ class _VideoPostState extends State<VideoPost>
     return VisibilityDetector(
       key: Key("${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: _videoPlayerController.value.isInitialized
-                ? VideoPlayer(_videoPlayerController)
-                : Container(
-                    color: Colors.black,
-                  ),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(
+            maxWidth: Breakpoints.sm,
           ),
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: _onTogglePause,
-            ),
-          ),
-          Positioned.fill(
-            child: IgnorePointer(
-              child: Center(
-                child: AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: _animationController.value,
-                      child: child,
-                    );
-                  },
-                  child: AnimatedOpacity(
-                    duration: _animationDuration,
-                    opacity: _isPaused ? 1 : 0,
-                    child: const FaIcon(
-                      FontAwesomeIcons.play,
-                      color: Colors.white,
-                      size: Sizes.size56,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: _videoPlayerController.value.isInitialized
+                    ? VideoPlayer(_videoPlayerController)
+                    : Container(
+                        color: Colors.black,
+                      ),
+              ),
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: _onTogglePause,
+                ),
+              ),
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: Center(
+                    child: AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return Transform.scale(
+                          scale: _animationController.value,
+                          child: child,
+                        );
+                      },
+                      child: AnimatedOpacity(
+                        duration: _animationDuration,
+                        opacity: _isPaused ? 1 : 0,
+                        child: const FaIcon(
+                          FontAwesomeIcons.play,
+                          color: Colors.white,
+                          size: Sizes.size56,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            left: 20,
-            top: 20,
-            child: GestureDetector(
-              onTap: _onToggleVolume,
-              child: Container(
-                height: Sizes.size32,
-                width: Sizes.size32,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade700.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: FaIcon(
-                    _isMuted
-                        ? FontAwesomeIcons.volumeXmark
-                        : FontAwesomeIcons.volumeHigh,
-                    color: Colors.white,
-                    size: Sizes.size12,
+              Positioned(
+                left: 20,
+                top: 20,
+                child: GestureDetector(
+                  onTap: _onToggleVolume,
+                  child: Container(
+                    height: Sizes.size32,
+                    width: Sizes.size32,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade700.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: FaIcon(
+                        _isMuted
+                            ? FontAwesomeIcons.volumeXmark
+                            : FontAwesomeIcons.volumeHigh,
+                        color: Colors.white,
+                        size: Sizes.size12,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 10,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "@Max",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: Sizes.size20,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Positioned(
+                bottom: 20,
+                left: 10,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "@Max",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Sizes.size20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Gaps.v10,
+                      const Text(
+                        "Super Viking with Soyeul 💖 ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Sizes.size18,
+                        ),
+                      ),
+                      Gaps.v10,
+                      VideoTag(
+                        tag: tags.map((tag) => '#$tag').join(', '),
+                      ),
+                      Gaps.v10,
+                      SizedBox(
+                        height: 30,
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: const VideoBgmInfo(bgmInfo: "10cm - 봄이 좋냐?"),
+                      ),
+                    ],
                   ),
-                  Gaps.v10,
-                  const Text(
-                    "Super Viking with Soyeul 💖 ",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: Sizes.size18,
-                    ),
-                  ),
-                  Gaps.v10,
-                  VideoTag(
-                    tag: tags.map((tag) => '#$tag').join(', '),
-                  ),
-                  Gaps.v10,
-                  SizedBox(
-                    height: 30,
-                    width: MediaQuery.of(context).size.width / 2,
-                    child: const VideoBgmInfo(bgmInfo: "10cm - 봄이 좋냐?"),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Positioned(
+                bottom: 20,
+                right: 10,
+                child: Column(
+                  children: [
+                    const CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                      foregroundImage: NetworkImage(
+                          'https://avatars.githubusercontent.com/u/78624290?v=4'),
+                      child: Text("Max"),
+                    ),
+                    Gaps.v24,
+                    const VideoButton(
+                      icon: FontAwesomeIcons.solidHeart,
+                      text: "2.9M",
+                    ),
+                    Gaps.v24,
+                    GestureDetector(
+                      onTap: () => _onCommentTap(context),
+                      child: const VideoButton(
+                        icon: FontAwesomeIcons.solidComment,
+                        text: "33.0K",
+                      ),
+                    ),
+                    Gaps.v24,
+                    const VideoButton(
+                      icon: FontAwesomeIcons.share,
+                      text: "Share",
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          Positioned(
-            bottom: 20,
-            right: 10,
-            child: Column(
-              children: [
-                const CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  foregroundImage: NetworkImage(
-                      'https://avatars.githubusercontent.com/u/78624290?v=4'),
-                  child: Text("Max"),
-                ),
-                Gaps.v24,
-                const VideoButton(
-                  icon: FontAwesomeIcons.solidHeart,
-                  text: "2.9M",
-                ),
-                Gaps.v24,
-                GestureDetector(
-                  onTap: () => _onCommentTap(context),
-                  child: const VideoButton(
-                    icon: FontAwesomeIcons.solidComment,
-                    text: "33.0K",
-                  ),
-                ),
-                Gaps.v24,
-                const VideoButton(
-                  icon: FontAwesomeIcons.share,
-                  text: "Share",
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
