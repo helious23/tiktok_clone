@@ -181,30 +181,31 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
-              Positioned(
-                left: 20,
-                top: 20,
-                child: GestureDetector(
-                  onTap: _onToggleVolume,
-                  child: Container(
-                    height: Sizes.size32,
-                    width: Sizes.size32,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade700.withOpacity(0.5),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        _isMuted
-                            ? FontAwesomeIcons.volumeXmark
-                            : FontAwesomeIcons.volumeHigh,
-                        color: Colors.white,
-                        size: Sizes.size12,
+              if (kIsWeb)
+                Positioned(
+                  left: 20,
+                  top: 20,
+                  child: GestureDetector(
+                    onTap: _onToggleVolume,
+                    child: Container(
+                      height: Sizes.size32,
+                      width: Sizes.size32,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade700.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: FaIcon(
+                          _isMuted
+                              ? FontAwesomeIcons.volumeXmark
+                              : FontAwesomeIcons.volumeHigh,
+                          color: Colors.white,
+                          size: Sizes.size12,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
               Positioned(
                 bottom: 20,
                 left: 10,
