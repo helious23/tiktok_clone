@@ -15,9 +15,9 @@ void main() async {
     ],
   );
 
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark,
-  );
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   SystemUiOverlayStyle.light,
+  // );
 
   runApp(const TikTokApp());
 }
@@ -30,7 +30,9 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TikTok Clone',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
+        brightness: Brightness.light,
         primaryColor: const Color(0xFFE9435A),
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
@@ -53,7 +55,15 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade50,
         ),
       ),
-      home: const MainNavigationScreen(),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade900,
+        ),
+        primaryColor: const Color(0xFFE9435A),
+        brightness: Brightness.dark,
+      ),
+      home: const SignUpScreen(),
     );
   }
 }
