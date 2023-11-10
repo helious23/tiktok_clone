@@ -16,9 +16,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: Sizes.size40,
           ),
           child: Column(
@@ -26,10 +26,13 @@ class LoginScreen extends StatelessWidget {
               Gaps.v80,
               Text(
                 'Log in to TikTok',
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Gaps.v20,
-              const Opacity(
+              Opacity(
                 opacity: 0.7,
                 child: Text(
                   'Manage your account, check notifications, comment on videos, and more.',
@@ -40,25 +43,25 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v40,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password",
                 targetWidget: LoginFormScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.facebook),
                 text: "Continue with Facebook",
                 targetWidget: UsernameScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.google),
                 text: "Continue with Google",
                 targetWidget: UsernameScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
                 targetWidget: UsernameScreen(),

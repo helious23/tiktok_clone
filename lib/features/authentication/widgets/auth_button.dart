@@ -43,13 +43,12 @@ class AuthButton extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: icon,
               ),
-              Text(
-                text,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
+              Text(text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: Sizes.size16,
+                    fontWeight: FontWeight.w600,
+                  )),
             ],
           ),
         ),

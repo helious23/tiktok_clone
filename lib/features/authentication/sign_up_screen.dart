@@ -21,9 +21,9 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: Sizes.size40,
           ),
           child: Column(
@@ -31,37 +31,42 @@ class SignUpScreen extends StatelessWidget {
               Gaps.v80,
               Text(
                 'Sign up for TikTok',
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Gaps.v20,
               Opacity(
                 opacity: 0.7,
                 child: Text(
                   'Create a profile, follow other accounts, make your own videos, and more.',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
               Gaps.v40,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password",
                 targetWidget: UsernameScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.facebook),
                 text: "Continue with Facebook",
                 targetWidget: UsernameScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.google),
                 text: "Continue with Google",
                 targetWidget: UsernameScreen(),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
                 targetWidget: UsernameScreen(),
