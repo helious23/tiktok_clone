@@ -180,6 +180,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                 color: selectedInterest.isEmpty
                     ? Colors.grey.shade300
                     : Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(
+                  Sizes.size5,
+                ),
               ),
               child: const Text(
                 "Next",
