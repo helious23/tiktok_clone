@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final List tabs = [
   "Top",
@@ -98,7 +99,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: Sizes.size10,
                 ),
@@ -109,7 +109,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   ),
                   child: FaIcon(
                     FontAwesomeIcons.magnifyingGlass,
-                    color: Colors.grey.shade900,
+                    color: Colors.grey.shade400,
                     size: Sizes.size20,
                   ),
                 ),
@@ -130,14 +130,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
             ),
+            indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
             isScrollable: true,
-            unselectedLabelColor: Colors.grey.shade500,
-            labelColor: Colors.black,
-            indicatorColor: Colors.black,
-            labelStyle: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: Sizes.size16,
-            ),
             tabs: [
               for (var tab in tabs) Tab(text: tab),
             ],
@@ -182,22 +176,24 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           ),
                         ),
                         Gaps.v10,
-                        Text(
-                          "${constraints.maxWidth} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vel urna nec varius.",
+                        const Text(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vel urna nec varius.",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: Sizes.size18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Gaps.v8,
-                        if (constraints.maxWidth < 200 ||
+                        if (constraints.maxWidth < 205 ||
                             constraints.maxWidth > 250)
                           DefaultTextStyle(
                             style: TextStyle(
                               fontSize: Sizes.size14,
-                              color: Colors.grey.shade600,
+                              color: isDarkMode(context)
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade600,
                               fontWeight: FontWeight.w600,
                             ),
                             child: Row(

@@ -47,7 +47,7 @@ class TikTokApp extends StatelessWidget {
           foregroundColor: Colors.black,
           elevation: 0,
           titleTextStyle: TextStyle(
-            fontSize: Sizes.size16 + Sizes.size2,
+            fontSize: Sizes.size18,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),
@@ -55,6 +55,15 @@ class TikTokApp extends StatelessWidget {
         bottomAppBarTheme: BottomAppBarTheme(
           elevation: 2,
           color: Colors.grey.shade50,
+        ),
+        tabBarTheme: TabBarTheme(
+          unselectedLabelColor: Colors.grey.shade500,
+          labelColor: Colors.black,
+          indicatorColor: Colors.black,
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: Sizes.size16,
+          ),
         ),
       ),
       darkTheme: ThemeData(
@@ -68,8 +77,18 @@ class TikTokApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade900,
         ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xFFE9435A),
+        ),
+        tabBarTheme: const TabBarTheme(
+          indicatorColor: Colors.white,
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: Sizes.size16,
+          ),
+        ),
       ),
-      home: const SignUpScreen(),
+      home: const MainNavigationScreen(),
     );
   }
 }
