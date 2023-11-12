@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/url.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key});
@@ -59,6 +60,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -66,10 +68,18 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           horizontalTitleGap: Sizes.size8,
           leading: Stack(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: Sizes.size24,
-                foregroundImage: NetworkImage(GITHUB_AVATAR),
-                child: Text("Max16"),
+                // foregroundImage: const NetworkImage(GITHUB_AVATAR),
+                backgroundColor:
+                    isDark ? Colors.black : Theme.of(context).primaryColor,
+                foregroundImage: const NetworkImage(GITHUB_AVATAR),
+                child: const Text(
+                  "Max16",
+                  style: TextStyle(
+                    fontSize: Sizes.size14,
+                  ),
+                ),
               ),
               Positioned(
                 bottom: 0,
@@ -96,18 +106,18 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             ),
           ),
           subtitle: const Text('Active Now'),
-          trailing: const Row(
+          trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               FaIcon(
                 FontAwesomeIcons.flag,
-                color: Colors.black,
+                color: isDark ? Colors.white : Colors.black,
                 size: Sizes.size20,
               ),
               Gaps.h32,
               FaIcon(
                 FontAwesomeIcons.ellipsis,
-                color: Colors.black,
+                color: isDark ? Colors.white : Colors.black,
                 size: Sizes.size20,
               ),
             ],
@@ -184,7 +194,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     bottom: 0,
                     width: constraints.maxWidth,
                     child: BottomAppBar(
-                      color: Colors.grey.shade100,
+                      color:
+                          isDark ? Colors.grey.shade800 : Colors.grey.shade100,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: Sizes.size10,
@@ -222,7 +233,6 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: Colors.white,
                                   suffix: _message.isEmpty
                                       ? const SizedBox()
                                       : GestureDetector(
@@ -244,16 +254,20 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                 height: Sizes.size40,
                                 decoration: BoxDecoration(
                                   color: _message.isEmpty
-                                      ? Colors.grey.shade300
+                                      ? isDark
+                                          ? Colors.grey.shade700
+                                          : Colors.grey.shade300
                                       : Colors.blue,
                                   borderRadius: BorderRadius.circular(
                                     Sizes.size56,
                                   ),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: FaIcon(
                                     FontAwesomeIcons.paperPlane,
-                                    color: Colors.white,
+                                    color: isDark
+                                        ? Colors.grey.shade800
+                                        : Colors.white,
                                   ),
                                 ),
                               ),
