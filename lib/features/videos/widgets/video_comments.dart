@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/constants/url.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -34,6 +36,7 @@ class _VideoCommentsState extends State<VideoComments> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final ScrollController scrollController = ScrollController();
+    final isDark = isDarkMode(context);
 
     return Container(
       height: size.height * 0.75,
@@ -44,11 +47,12 @@ class _VideoCommentsState extends State<VideoComments> {
       ),
       clipBehavior: Clip.hardEdge,
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
         appBar: AppBar(
-          backgroundColor: Colors.grey.shade50,
+          backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
           title: const Text("22,796 comments"),
           automaticallyImplyLeading: false,
+          elevation: 0,
           actions: [
             IconButton(
               onPressed: _onClosePressed,
@@ -78,9 +82,13 @@ class _VideoCommentsState extends State<VideoComments> {
                     itemBuilder: (context, index) => Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 18,
-                          child: Text("Max"),
+                          backgroundColor: isDark
+                              ? Colors.black
+                              : Theme.of(context).primaryColor,
+                          foregroundImage: const NetworkImage(GITHUB_AVATAR),
+                          child: const Text("Max"),
                         ),
                         Gaps.h10,
                         Expanded(
@@ -126,7 +134,7 @@ class _VideoCommentsState extends State<VideoComments> {
                   width: constraints.maxWidth,
                   bottom: 0,
                   child: BottomAppBar(
-                    color: Colors.white,
+                    color: isDark ? Colors.grey.shade800 : Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Sizes.size16,
@@ -136,8 +144,11 @@ class _VideoCommentsState extends State<VideoComments> {
                         children: [
                           CircleAvatar(
                             radius: 18,
-                            backgroundColor: Colors.grey.shade500,
+                            backgroundColor: isDark
+                                ? Colors.grey.shade900
+                                : Theme.of(context).primaryColor,
                             foregroundColor: Colors.white,
+                            foregroundImage: const NetworkImage(GITHUB_AVATAR),
                             child: const Text('Max'),
                           ),
                           Gaps.h10,
@@ -158,7 +169,9 @@ class _VideoCommentsState extends State<VideoComments> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: Colors.grey.shade200,
+                                  // fillColor: isDark
+                                  //     ? Colors.grey.shade500
+                                  //     : Colors.white,
                                   contentPadding: const EdgeInsets.symmetric(
                                     horizontal: Sizes.size10,
                                   ),
@@ -171,17 +184,23 @@ class _VideoCommentsState extends State<VideoComments> {
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.at,
-                                          color: Colors.grey.shade900,
+                                          color: isDark
+                                              ? Colors.grey.shade500
+                                              : Colors.grey.shade900,
                                         ),
                                         Gaps.h12,
                                         FaIcon(
                                           FontAwesomeIcons.gift,
-                                          color: Colors.grey.shade900,
+                                          color: isDark
+                                              ? Colors.grey.shade500
+                                              : Colors.grey.shade900,
                                         ),
                                         Gaps.h12,
                                         FaIcon(
                                           FontAwesomeIcons.faceSmile,
-                                          color: Colors.grey.shade900,
+                                          color: isDark
+                                              ? Colors.grey.shade500
+                                              : Colors.grey.shade900,
                                         ),
                                         Gaps.h12,
                                         if (_isWriting)
@@ -189,8 +208,10 @@ class _VideoCommentsState extends State<VideoComments> {
                                             onTap: _stopWriting,
                                             child: FaIcon(
                                               FontAwesomeIcons.circleArrowUp,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
+                                              color: isDark
+                                                  ? Colors.grey.shade50
+                                                  : Theme.of(context)
+                                                      .primaryColor,
                                             ),
                                           ),
                                       ],
