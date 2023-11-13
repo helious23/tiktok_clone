@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/inbox/chats_screen.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
@@ -24,6 +25,7 @@ class InboxScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -55,10 +57,10 @@ class InboxScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                trailing: const FaIcon(
+                trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   size: Sizes.size16,
-                  color: Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                 ),
               ),
               Container(
@@ -91,10 +93,10 @@ class InboxScreen extends StatelessWidget {
                     fontSize: Sizes.size14,
                   ),
                 ),
-                trailing: const FaIcon(
+                trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   size: Sizes.size14,
-                  color: Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                 ),
               ),
             ],

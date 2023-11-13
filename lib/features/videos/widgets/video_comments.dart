@@ -47,9 +47,9 @@ class _VideoCommentsState extends State<VideoComments> {
       ),
       clipBehavior: Clip.hardEdge,
       child: Scaffold(
-        backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
+        backgroundColor: isDark ? null : Colors.grey.shade50,
         appBar: AppBar(
-          backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
+          backgroundColor: isDark ? null : Colors.grey.shade50,
           title: const Text("22,796 comments"),
           automaticallyImplyLeading: false,
           elevation: 0,
@@ -82,13 +82,20 @@ class _VideoCommentsState extends State<VideoComments> {
                     itemBuilder: (context, index) => Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: Sizes.size18,
-                          backgroundColor: isDark
-                              ? Colors.black
-                              : Theme.of(context).primaryColor,
-                          foregroundImage: const NetworkImage(GITHUB_AVATAR),
-                          child: const Text("Max"),
+                        Container(
+                          padding: const EdgeInsets.all(0.5),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade500,
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            radius: Sizes.size18,
+                            backgroundColor: isDark
+                                ? Colors.grey.shade500
+                                : Theme.of(context).primaryColor,
+                            foregroundImage: const NetworkImage(GITHUB_AVATAR),
+                            child: const Text("Max"),
+                          ),
                         ),
                         Gaps.h10,
                         Expanded(
@@ -134,7 +141,6 @@ class _VideoCommentsState extends State<VideoComments> {
                   width: constraints.maxWidth,
                   bottom: 0,
                   child: BottomAppBar(
-                    color: isDark ? Colors.grey.shade800 : Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Sizes.size16,
