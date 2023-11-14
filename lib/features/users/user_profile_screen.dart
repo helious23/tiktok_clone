@@ -7,7 +7,6 @@ import 'package:tiktok_clone/constants/url.dart';
 import 'package:tiktok_clone/features/settings/settings_screen.dart';
 import 'package:tiktok_clone/features/users/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_clone/features/users/widgets/user_count.dart';
-import 'package:tiktok_clone/utils.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -27,10 +26,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
-    return Container(
-      color: isDark ? Colors.grey.shade900 : Colors.white,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      body: SafeArea(
         child: DefaultTabController(
           length: 2,
           child: NestedScrollView(
@@ -51,11 +49,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Theme.of(context).primaryColor,
-                        foregroundImage: const NetworkImage(GITHUB_AVATAR),
-                        child: const Text('Max16'),
+                      Gaps.v20,
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.white,
+                          ),
+                        ),
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          foregroundImage: const NetworkImage(GITHUB_AVATAR),
+                          child: const Text('Max16'),
+                        ),
                       ),
                       Gaps.v20,
                       Row(

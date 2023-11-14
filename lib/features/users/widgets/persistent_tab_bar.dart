@@ -15,38 +15,35 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
           maxWidth: Breakpoints.sm,
         ),
         decoration: BoxDecoration(
-          color: isDark ? Colors.grey.shade900 : Colors.grey.shade100,
+          color: Theme.of(context).appBarTheme.backgroundColor,
           border: Border.symmetric(
             horizontal: BorderSide(
-              color: Colors.grey.shade200,
+              color: isDark ? Colors.grey.shade700 : Colors.grey.shade200,
               width: 0.5,
             ),
           ),
         ),
         child: TabBar(
-          labelColor: isDark ? Colors.black : Colors.white,
-          indicatorColor: isDark ? Colors.white : Colors.black,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
           labelPadding: const EdgeInsets.symmetric(
             vertical: Sizes.size10,
           ),
-          indicatorSize: TabBarIndicatorSize.label,
-          tabs: [
+          tabs: const [
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: Sizes.size20,
               ),
               child: Icon(
                 Icons.grid_4x4_sharp,
-                color: isDark ? Colors.white : Colors.black,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: Sizes.size20,
               ),
               child: FaIcon(
                 FontAwesomeIcons.heart,
-                color: isDark ? Colors.white : Colors.black,
               ),
             ),
           ],
