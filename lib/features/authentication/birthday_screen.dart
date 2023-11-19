@@ -94,9 +94,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 300,
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.3,
+        child: BottomAppBar(
           child: CupertinoDatePicker(
             onDateTimeChanged: _setTextFieldDate,
             maximumDate: defaultDate,
