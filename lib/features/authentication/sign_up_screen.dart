@@ -20,6 +20,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Localizations.localeOf(context));
     return Scaffold(
       body: const SafeArea(
         child: Padding(
