@@ -1,3 +1,0 @@
-arb-dir: lib/intl # arb 파일 경로 default
-template-arb-file: intl_en.arb # 번역 할 arb 파일
-output-localization-file: intl_generated.dart # generate localization 파일명
