@@ -1,10 +1,15 @@
 {
   "signUpTitle": "{nameOfTheApp}에 가입하세요",
   "signUpSubtitle": "Create a profile, follow other accounts, make your own videos, and more.",
-  "emailPasswordButton": "Use email & password",
-  "facebookButton": "Continue with Facebook",
-  "googleButton": "Continue with Google",
-  "appleButton": "Continue with Apple",
-  "alreadyHaveAnAccount": "Already have an account?",
-  "logIn": "Log in"
+  "emailPasswordButton": "이메일 사용",
+  "facebookButton": "Facebook으로 계속 진행",
+  "googleButton": "Google로 계속 진행",
+  "appleButton": "Apple로 계속 진행",
+  "alreadyHaveAnAccount": "이미 계정이 있으신가요?",
+  "logIn": "로그인",
+  "likeCount": "{value}",
+  "commentCount": "{value}",
+  "commentTitle": "댓글 {value}",
+  "commentLike": "{value}",
+  "addComment": "댓글을 남겨주세요!"
 }

@@ -70,7 +70,7 @@ class S {
     );
   }
 
-  /// `Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1 {video} other{videos}}, and more.`
+  /// `Create a profile, follow other accounts, make your own {videoCount, plural, zero{no videos} one{video} other{videos}}, and more.`
   String signUpSubtitle(num videoCount) {
     return Intl.message(
       'Create a profile, follow other accounts, make your own ${Intl.plural(videoCount, zero: 'no videos', one: 'video', other: 'videos')}, and more.',
@@ -137,6 +137,76 @@ class S {
       name: 'logIn',
       desc: '',
       args: [gender],
+    );
+  }
+
+  /// `{value}`
+  String likeCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString',
+      name: 'likeCount',
+      desc: 'Count of likes',
+      args: [valueString],
+    );
+  }
+
+  /// `{value}`
+  String commentCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString',
+      name: 'commentCount',
+      desc: 'Count of comments',
+      args: [valueString],
+    );
+  }
+
+  /// `{value} {commentCount, plural, one{comment} other{comments}}`
+  String commentTitle(int value, num commentCount) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString ${Intl.plural(commentCount, one: 'comment', other: 'comments')}',
+      name: 'commentTitle',
+      desc: 'Count of comment on video comment screen',
+      args: [valueString, commentCount],
+    );
+  }
+
+  /// `{value}`
+  String commentLike(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString',
+      name: 'commentLike',
+      desc: 'Count of comment likes',
+      args: [valueString],
+    );
+  }
+
+  /// `Add comment...`
+  String get addComment {
+    return Intl.message(
+      'Add comment...',
+      name: 'addComment',
+      desc: '',
+      args: [],
     );
   }
 }

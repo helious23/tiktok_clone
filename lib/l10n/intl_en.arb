@@ -19,11 +19,52 @@
       }
     }
   },
-  "signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1 {video} other{videos}}, and more.",
+  "signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, zero{no videos} one{video} other{videos}}, and more.",
   "emailPasswordButton": "Use email & password",
   "facebookButton": "Continue with Facebook",
   "googleButton": "Continue with Google",
   "appleButton": "Continue with Apple",
   "alreadyHaveAnAccount": "Already have an account?",
-  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}"
+  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}",
+  "likeCount": "{value}",
+  "@likeCount": {
+    "description": "Count of likes",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentCount": "{value}",
+  "@commentCount": {
+    "description": "Count of comments",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentTitle": "{value} {commentCount, plural, one{comment} other{comments}}",
+  "@commentTitle": {
+    "description": "Count of comment on video comment screen",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentLike": "{value}",
+  "@commentLike": {
+    "description": "Count of comment likes",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "addComment": "Add comment..."
 }

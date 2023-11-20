@@ -20,27 +20,37 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
-  static String m0(gender) => "Log in";
+  static String m0(value) => "${value}";
 
-  static String m2(videoCount) =>
+  static String m1(value) => "${value}";
+
+  static String m2(value, commentCount) => "댓글 ${value}";
+
+  static String m3(value) => "${value}";
+
+  static String m4(gender) => "로그인";
+
+  static String m6(videoCount) =>
       "Create a profile, follow other accounts, make your own videos, and more.";
 
-  static String m3(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
+  static String m7(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addComment": MessageLookupByLibrary.simpleMessage("댓글을 남겨주세요!"),
         "alreadyHaveAnAccount":
-            MessageLookupByLibrary.simpleMessage("Already have an account?"),
-        "appleButton":
-            MessageLookupByLibrary.simpleMessage("Continue with Apple"),
-        "emailPasswordButton":
-            MessageLookupByLibrary.simpleMessage("Use email & password"),
+            MessageLookupByLibrary.simpleMessage("이미 계정이 있으신가요?"),
+        "appleButton": MessageLookupByLibrary.simpleMessage("Apple로 계속 진행"),
+        "commentCount": m0,
+        "commentLike": m1,
+        "commentTitle": m2,
+        "emailPasswordButton": MessageLookupByLibrary.simpleMessage("이메일 사용"),
         "facebookButton":
-            MessageLookupByLibrary.simpleMessage("Continue with Facebook"),
-        "googleButton":
-            MessageLookupByLibrary.simpleMessage("Continue with Google"),
-        "logIn": m0,
-        "signUpSubtitle": m2,
-        "signUpTitle": m3
+            MessageLookupByLibrary.simpleMessage("Facebook으로 계속 진행"),
+        "googleButton": MessageLookupByLibrary.simpleMessage("Google로 계속 진행"),
+        "likeCount": m3,
+        "logIn": m4,
+        "signUpSubtitle": m6,
+        "signUpTitle": m7
       };
 }

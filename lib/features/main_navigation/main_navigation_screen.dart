@@ -19,7 +19,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen>
     with SingleTickerProviderStateMixin {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   bool _buttonTap = false;
 
   late final AnimationController _animationController = AnimationController(
