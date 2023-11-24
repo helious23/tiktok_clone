@@ -31,7 +31,7 @@ class TikTokApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    S.load(const Locale("ko"));
+    // S.load(const Locale("ko"));
 
     return MaterialApp(
       title: 'TikTok Clone',

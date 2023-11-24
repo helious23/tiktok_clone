@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m6(videoCount) =>
       "Create a profile, follow other accounts, make your own videos, and more.";
 
-  static String m7(nameOfTheApp, when) => "${nameOfTheApp}에 가입하세요 ${when}";
+  static String m7(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -44,7 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "commentCount": m0,
         "commentLike": m1,
         "commentTitle": m2,
-        "emailPasswordButton": MessageLookupByLibrary.simpleMessage("이메일 사용"),
+        "emailPasswordButton":
+            MessageLookupByLibrary.simpleMessage("이메일로 계속 진행"),
         "facebookButton":
             MessageLookupByLibrary.simpleMessage("Facebook으로 계속 진행"),
         "googleButton": MessageLookupByLibrary.simpleMessage("Google로 계속 진행"),
