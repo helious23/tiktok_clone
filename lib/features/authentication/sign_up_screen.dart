@@ -11,12 +11,13 @@ import 'package:tiktok_clone/utils.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void _onLoginTab(BuildContext context) {
-    Navigator.of(context).push(
+  void _onLoginTab(BuildContext context) async {
+    final result = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       ),
     );
+    print(result);
   }
 
   @override
@@ -96,7 +97,7 @@ class SignUpScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () => _onLoginTab(context),
                 child: Text(
-                  S.of(context).logIn("female"),
+                  S.of(context).logIn("male"),
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: Sizes.size16,
